@@ -1,0 +1,12 @@
+version: "3"
+services:
+  go:
+    image: golang
+    container_name: go
+  mongo1:
+    image: mongo
+    container_name: localmongo1
+    expose:
+    - 27017
+
+    restart: always
