@@ -18,7 +18,6 @@ func CreateUser(rw http.ResponseWriter, r *http.Request) {
 
 	rw.Header().Set("Content-Type", "appplication/json")
 
-	// singleuser := r.Context().Value(middleware.KeyUser{}).(*ds.User)
 	var singleuser ds.User
 	json.NewDecoder(r.Body).Decode(&singleuser)
 
