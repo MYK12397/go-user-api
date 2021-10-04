@@ -11,11 +11,11 @@ import (
 
 type User struct {
 	ID        primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	FirstName string             `json:"firstname,omitempty" bson:"firstname,omitempty" `
-	LastName  string             `json:"lastname,omitempty" bson:"lastname,omitempty" ` //validate: "required,fl" `
+	FirstName string             `json:"firstname,omitempty" bson:"firstname,omitempty" validation:"required,fl"`
+	LastName  string             `json:"lastname,omitempty" bson:"lastname,omitempty" validation:"required,fl"` 
 	CreatedOn time.Time          `json:"createdon" bson:"createdon"`
 	UpdateOn  time.Time          `json:"updateon" bson:"updateon"`
-	Mobile    string             `json:"mobile,omitempty" bson:"mobile,omitempty" ` //validate: "required,mob"`
+	Mobile    string             `json:"mobile,omitempty" bson:"mobile,omitempty" validation:"required,mob"` 
 	Active    bool               `json:"active,omitempty" bson:"active,omitempty"`
 	Age       AgeDS              `json:"age,omitempty"  bson:"age,omitempty"`
 }
