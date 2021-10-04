@@ -12,7 +12,7 @@ import (
 
 func ConnectDB() *mongo.Collection {
 
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	clientOptions := options.Client().ApplyURI("mongodb://mongo1:27017")
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
@@ -22,7 +22,7 @@ func ConnectDB() *mongo.Collection {
 
 	fmt.Println("DataBase is Connected")
 
-	collection := client.Database("Userdb").Collection("users_data")
+	collection := client.Database("Userd").Collection("user_data")
 
 	return collection
 }
