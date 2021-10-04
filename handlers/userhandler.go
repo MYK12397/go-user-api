@@ -41,7 +41,7 @@ func CreateUser(rw http.ResponseWriter, r *http.Request) {
 }
 
 func GetUsers(rw http.ResponseWriter, r *http.Request) {
-	rw.Header().Add("Content-Type", "application/json")
+	rw.Header().Set("Content-Type", "application/json")
 
 	collection := godb.ConnectDB()
 	cursor, err := collection.Find(context.TODO(), bson.M{})
@@ -66,8 +66,8 @@ func GetUsers(rw http.ResponseWriter, r *http.Request) {
 		}
 
 	}
-	// if err := cursor.Err(); err != nil {
-	// 	log.Fatal(err)}
+	if err := cursor.Err(); err != nil {
+		log.Fatal(err)}
 
 	json.NewEncoder(rw).Encode(Users)
 }
@@ -79,10 +79,6 @@ func GetID(rw http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	id, _ := primitive.ObjectIDFromHex(vars["id"])
-	// if er != nil {
-	// 	rw.WriteHeader(http.StatusBadRequest)
-	// 	return
-	// }
 
 	sorted := bson.M{"_id": id}
 
@@ -131,7 +127,7 @@ func UpdateUser(rw http.ResponseWriter, r *http.Request) {
 		}},
 	}
 	collection := godb.ConnectDB()
-	// create filter document
+
 	filter := bson.M{"_id": id}
 
 	err2 := collection.FindOneAndUpdate(context.TODO(), filter, update).Decode(&user)
@@ -146,7 +142,7 @@ func UpdateUser(rw http.ResponseWriter, r *http.Request) {
 
 func DeleteUser(rw http.ResponseWriter, r *http.Request) {
 
-	rw.Header().Add("Content-Type", "application/json")
+	rw.Header().Set("Content-Type", "application/json")
 
 	vars := mux.Vars(r)
 
