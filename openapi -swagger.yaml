@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  title: User-API
+  description: User-API is a service exposed publicly to CRUD user.
+  version: 1.0.0
+servers:
+  - url: https://localhost:9090/v1/users
+    description: Prod
+paths:
+  /v1/users:
+    post:
+      summary: create user
+      tags:
+        - users
+      requestBody:
+        description: Required data for creating user
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                FirstName:
+                  type: string
+                  example: string
+                LastName:
+                  type: string
+                  example: string
+                Mobile:
+                  type: string
+                  example: 1234567890
+                Active:
+                  type: boolean
+                Age:
+                  type: object
+                  properties:
+                    value:
+                      type: integer
+                    Interval:
+                      type: string
+      responses:
+        '200':
+          description: user created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inserted_id:
+                    type: object
+                    example: 5349b4ddd2781d08c09890f4
+        '400':
+          description: Request body is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Cannot find the data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    get:
+      tags:
+        - users
+      summary: list all users
+      responses:
+        '200':
+          description: users fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/data'
+        '400':
+          description: Request body is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Cannot find the data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /v1/users/{id}:
+    get:
+      tags:
+        - users
+      summary: Get a specific User
+      description: This endpoint retrieves a specific user.
+      parameters:
+        - name: id
+          in: path
+          description: ID of the contact.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/data'
+        '400':
+          description: Request body is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Cannot find the data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      tags:
+        - users
+      summary: Get a specific User
+      description: This endpoint updates a specific user.
+      parameters:
+        - name: id
+          in: path
+          description: ID of the contact.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Required data for updating user
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                FirstName:
+                  type: string
+                  example: string
+                LastName:
+                  type: string
+                  example: string
+                Mobile:
+                  type: string
+                  example: 1234567890
+                Active:
+                  type: boolean
+                Age:
+                  type: object
+                  properties:
+                    value:
+                      type: integer
+                    Interval:
+                      type: string
+
+  
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/data'
+        '400':
+          description: Request body is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Cannot find the data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    delete:
+      tags:
+        - users
+      summary: Get a specific User
+      description: This endpoint deletes a specific user.
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted_user:
+                    type: object
+                    example: 5349b4ddd2781d08c09890f4
+        '400':
+          description: Request body is not valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Cannot find the data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+components:
+  schemas:
+    data:
+      type: object
+      properties:
+        _id:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        CreatedOn:
+          type: string
+        UpdatedOn:
+          type: string
+        Mobile:
+          type: string
+        Active:
+          type: boolean
+        Age:
+          type: object
+          properties:
+            value:
+              type: integer
+            Interval:
+              type: string
+    valid:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/data'
+    error:
+      type: object
+      properties:
+        status:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string

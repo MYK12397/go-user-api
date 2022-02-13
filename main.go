@@ -30,7 +30,7 @@ func main() {
 	deleteR.HandleFunc("/v1/users/{id}", handlers.DeleteUser)
 
 	s := &http.Server{
-		Addr:         ":8000",
+		Addr:         ":9090",
 		Handler:      sm,
 		IdleTimeout:  120 * time.Second,
 		ReadTimeout:  5 * time.Second,

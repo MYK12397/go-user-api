@@ -22,7 +22,7 @@ func ConnectDB() *mongo.Collection {
 
 	fmt.Println("DataBase is Connected")
 
-	collection := client.Database("Userd").Collection("user_data")
+	collection := client.Database("Userds").Collection("user_data")
 
 	return collection
 }
